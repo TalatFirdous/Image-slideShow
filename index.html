@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slideshow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            position: relative;
+        }
+        .active {
+            display: block;
+        }
+        .slideshow-container img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.5s ease; /* Smooth transition */
+        }
+        .slideshow-container img:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+        .caption {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Image Slideshow</h1>
+    <div class="slideshow-container">
+        <div class="slide active">
+            <img src="https://blog.mystart.com/wp-content/uploads/shutterstock_124222435-e1521832609986.jpg" alt="Image 1">
+            <div class="caption">Beautiful Landscape 1</div>
+        </div>
+        <div class="slide">
+            <img src="http://www.pixelstalk.net/wp-content/uploads/2016/04/Mountain-wallpaper-HD-pictures-images-photos.jpg" alt="Image 2">
+            <div class="caption">Majestic Mountains</div>
+        </div>
+        <div class="slide">
+            <img src="https://wallpapercave.com/wp/wp4064343.jpg" alt="Image 3">
+            <div class="caption">Serene Beach</div>
+        </div>
+        <button class="nav-button prev" onclick="prevSlide()">&#10094;</button>
+        <button class="nav-button next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    </script>
+
+</body>
+</html>
